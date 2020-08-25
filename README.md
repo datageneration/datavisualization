@@ -1,1 +1,1 @@
-## Data visualization GitHub
+## Data Visualization GitHub
