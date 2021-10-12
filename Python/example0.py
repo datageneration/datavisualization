@@ -19,7 +19,7 @@ import seaborn as sns
 
 
 #Read csv file
-CO2 = pd.read_csv("https://raw.githubusercontent.com/kho777/data-visualization/master/data/CO2.csv")
+CO2 = pd.read_csv("https://raw.githubusercontent.com/datageneration/datavisualization/master/data/CO2.csv")
 
 #Read other formats
 #pd.read_excel('myfile.xlsx',sheet_name='Sheet1', index_col=None, na_values=['NA'])

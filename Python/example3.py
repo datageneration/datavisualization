@@ -4,8 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-CO2 = pd.read_csv("https://raw.githubusercontent.com/kho777/data-visualization/master/data/CO2.csv")
-hpi16= pd.read_excel("https://github.com/kho777/data-visualization/blob/master/data/hpi2016.xlsx?raw=true",sheet_name='Sheet1', index_col=None, na_values=['NA'])
+CO2 = pd.read_csv("https://raw.githubusercontent.com/datageneration/datavisualization/master/data/CO2.csv")
+hpi16= pd.read_excel("https://github.com/datageneration/datavisualization/blob/master/data/hpi2016.xlsx?raw=true",sheet_name='Sheet1', index_col=None, na_values=['NA'])
 CO2.head()
 
 # Using matplotlib

@@ -9,7 +9,7 @@
 import numpy as np
 import pandas as pd
 
-hpi16= pd.read_excel("https://github.com/kho777/data-visualization/blob/master/data/hpi2016.xlsx?raw=true",sheet_name='Sheet1', index_col=None, na_values=['NA'])
+hpi16= pd.read_excel("https://github.com/datageneration/datavisualization/blob/master/data/hpi2016.xlsx?raw=true",sheet_name='Sheet1', index_col=None, na_values=['NA'])
 
 # Exploring data
 
