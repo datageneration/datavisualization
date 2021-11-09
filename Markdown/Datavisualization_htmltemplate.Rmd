@@ -66,7 +66,8 @@ ggplot(gapminder, mapping = mapping) +
   labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
   geom_text(aes(label=ifelse((country == "China"), "China", ifelse(country=="United States", "United States", ""))),vjust=0,nudge_y = 1,size=6) +
   transition_time(year) +
-  ease_aes('linear')
+  ease_aes('linear') +
+  theme(text=element_text(family="Palatino"))
 ```
 
 
