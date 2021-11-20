@@ -14,18 +14,33 @@ output:
         google: Proza Libre
 ---
 
-This dashboard uses Plotly package, with example data and Gapminder data to illustrate interactive charts.  Note the font use, color choices and animation button and slider control.
+This dashboard uses the **Plotly** package, with example data and Gapminder data to illustrate interactive charts.  Note the font use, color choices and animation button and slider control.
 
 ```{r setup, include=FALSE}
+
+# Set theme for dashboard
+# install.packages(c("bslib","thematic"))
+library(thematic)
 if (requireNamespace("thematic")) 
   thematic::thematic_rmd(font = "auto")
 ```
 
-```{r echo=FALSE, message=FALSE}
-library(plotly)
+```{r message=FALSE}
 
+# install.packages(c("plotly","tidyverse","RColrBrewer"))
+library(plotly)
+library(tidyverse)
+# Reading in example dataset
 df <- read.csv("https://plotly.com/~public.health/17.csv", skipNul = TRUE, encoding = "UTF-8")
 
+# Font management
+library(showtext)
+font_add_google("Cormorant Garamond", "corgaramond")
+t <- list(
+  family = "corgaramond",
+  size = 12)
+
+# Create label function for animation button
 labels <- function(size, label) {
   list(
     args = c("xbins.size", size), 
@@ -34,12 +49,13 @@ labels <- function(size, label) {
   )
 }
 
+# Create Figure object
 fig <- df %>%
   plot_ly(
     x = ~date,
     autobinx = FALSE, 
     autobiny = TRUE, 
-    marker = list(color = "rgb(68, 68, 68)"), 
+    marker = list(color = "steelblue"), 
     name = "date", 
     type = "histogram", 
     xbins = list(
@@ -48,10 +64,12 @@ fig <- df %>%
       start = "1983-12-31 12:00"
     )
   )
+
+# Configure dropdown menu
 fig <- fig %>% layout(
-  paper_bgcolor = "rgb(240, 240, 240)", 
-  plot_bgcolor = "rgb(240, 240, 240)", 
-  title = "<b>Shooting Incidents</b><br>use dropdown to change bin size",
+  paper_bgcolor = "white", 
+  plot_bgcolor = "white", 
+  title = "<b>Shooting Incidents</b><br>use dropdown to change bin size", # HTML to separate line
   xaxis = list(
     type = 'date'
   ),
@@ -74,23 +92,29 @@ fig <- fig %>% layout(
   )
 )
 
+fig <- fig %>% layout(font = t) # Add font to text
+
 fig
 
 
 ```
-```{r}
-library(gapminder)
-library(descr)
-library(RColorBrewer)
-descr::freq(gapminder$continent)
+```{r  message=FALSE}
 
+#install.packages("gapminder")
+library(gapminder)
+library(RColorBrewer)
 library(plotly)
 
+# Read in Gapminder data
 df <- gapminder 
 
+# Font management
+
 t <- list(
-  family = "Palatino",
-  size = 14)
+  family = "corgaramond",
+  size = 12)
+
+# Create figure object
 fig <- df %>%
   plot_ly(
     x = ~gdpPercap, 
@@ -98,7 +122,8 @@ fig <- df %>%
     size = ~pop, 
     color = ~continent, 
     colors = c("slateblue3", "steelblue", "firebrick", "forestgreen", "turquoise1"), 
-    alpha=.5,
+        # manually select colar 
+    alpha=.5, # translucent glyth
     frame = ~year, 
     text = ~country, 
     hoverinfo = "text",
@@ -106,6 +131,8 @@ fig <- df %>%
     mode = 'markers',
     fill = ~''
   )
+
+# Add font to text
 fig <- fig %>% layout(
   xaxis = list(
     type = "log"
@@ -113,7 +140,9 @@ fig <- fig %>% layout(
 )
 
 
-fig <- fig %>% layout(legend = list(orientation = 'h'))
+fig <- fig %>% layout(legend = list(orientation = "h",   # show entries horizontally
+                     xanchor = "center",  # use center of legend as anchor
+                     x = 0.5, y = 100))             # put legend in center of x-axis
 
 fig <- fig %>% animation_button(
   x = 1, xanchor = "right", y = 0, yanchor = "bottom"
