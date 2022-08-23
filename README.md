@@ -1,1 +1,1 @@
-## Data Visualization GitHub
+## Data Visualization Class Repository
