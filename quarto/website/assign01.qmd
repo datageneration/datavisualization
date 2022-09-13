@@ -1,0 +1,8 @@
+---
+title: "assignment1"
+editor: visual
+---
+
+My Fall leaf:
+
+![Fall leaf](fall.jpg)

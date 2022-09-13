@@ -1,0 +1,9 @@
+---
+title: "About"
+---
+
+Karl Ho data project
+
+```{r}
+plot(Titanic)
+```

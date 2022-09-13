@@ -1,0 +1,14 @@
+---
+title: "Karl Ho"
+---
+
+### Karl Ho website
+
+Data stories are posted here.
+
+$y=\alpha+\beta{x}^2$
+
+```{r}
+par(family="sans")
+plot(iris, pch=5, cex=.55, col="forestgreen")
+```

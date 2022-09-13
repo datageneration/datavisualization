@@ -1,0 +1,27 @@
+project:
+  type: website
+
+website:
+  title: "Karl Ho"
+  navbar:
+    left:
+      - href: index.qmd
+        text: home
+      - href: about.qmd
+        text: About
+      - href: research.qmd
+        text: Research
+      - text: Assignments
+        menu:
+          - assign01.qmd
+          - assign02.qmd
+        
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+
