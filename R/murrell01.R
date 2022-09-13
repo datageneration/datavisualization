@@ -30,7 +30,7 @@ lines(x, y2)
 points(x, y1, pch=16, cex=2) # Try different cex value?  
 points(x, y2, pch=21, bg="white", cex=2)  # Different background color
 par(col="gray50", fg="gray50", col.axis="gray50")
-axis(1, at=seq(0, 16, 4))
+axis(1, at=seq(0, 16, 4)) # What is the first number standing for?
 axis(2, at=seq(0, 6, 2))
 axis(4, at=seq(0, 6, 2))
 box(bty="u")
@@ -44,7 +44,7 @@ par(mar=c(5.1, 4.1, 4.1, 2.1), col="black", fg="black", col.axis="black")
 # Random data
 Y <- rnorm(50)
 # Make sure no Y exceed [-3.5, 3.5]
-Y[Y < -3.5 | Y > 3.5] <- NA # Selection
+Y[Y < -3.5 | Y > 3.5] <- NA # Selection/set range
 x <- seq(-3.5, 3.5, .1)
 dn <- dnorm(x)
 par(mar=c(4.5, 4.1, 3.1, 0))
