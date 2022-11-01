@@ -1,0 +1,122 @@
+---
+title: "Storyboard Demonstration"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+---
+
+### Gapminder is based on the Gapminder data, showing the life expectancy, population, GDP PC data, etc.
+
+
+
+```{r echo=FALSE, message=FALSE}
+library(ggplot2)
+library(gapminder)
+
+options( scipen = 1 ) # turn off scientific notation with positive value
+ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp, 
+                          color = continent)) + 
+  geom_point(cex = 1) +
+  geom_smooth(method = "loess", color = "red") + scale_x_log10() + 
+  xlab("GDP per capita") +
+  ylab("Life Expectancy") +
+  theme_bw() +
+  theme(legend.position = c(.85, .2)) +
+  theme(text = element_text(size = 14, family = "Palatino"))
+
+```
+   
+*** 
+
+This is a sample dashboard design based on flexdashboard sample layout (storyboard).  More detail can be included in the sidebar (note the asterisks above the text), explaining the data in chart.  Markdown codes can be used for giving narratives to the charts/demonstrations.
+
+### Happy Planet Index 
+
+```{r}
+library(rbokeh)
+hpi2016=read.csv("https://raw.githubusercontent.com/datageneration/datavisualization/master/data/hpi2016all.csv")
+figure(width = 800, height = 600, legend_location = "top_left") %>%
+  ly_points(AverageLifeExpectancy, HappyPlanetIndex, data = hpi2016, color = Region, glyph = Region, size = 5, hover = list(Country, GDPPC))
+
+```
+
+*** 
+Happy Planet Index data are presented here. This is to demo the story of the chart created using bokeh.
+
+### Leaflet 
+
+```{r echo=FALSE, out.width=350}
+library(leaflet)
+library(maps)
+
+eppsmap <- leaflet() %>% setView(-96.7478372, 32.9886268, zoom=14)
+
+esri <- grep("^Esri", providers, value = TRUE)
+
+for (provider in esri) {
+  eppsmap <- eppsmap %>% addProviderTiles(provider, group = provider)
+}
+
+find_me_at <- paste(sep = "<br/>",
+                  "<b><a href='http://karlho.com' target='_blank'>Karl Ho </a></b>",
+                  "<b><a href='http://epps.utdallas.edu' target='_blank'>School of Economic, </a></b>",
+                  "<b><a href='http://epps.utdallas.edu' target='_blank'>Political and Policy Sciences</a></b>",
+                  "<b><a href='http://www.utdallas.edu' target='_blank'>University of Texsa at Dallas</a></b>",
+                  "800 West Campbell Road, GR31",
+                  "Richardson TX 75080"
+)
+eppsmap %>%
+  addLayersControl(baseGroups = names(esri),
+                   options = layersControlOptions(collapsed = TRUE)) %>%
+  # addMiniMap(tiles = esri[[1]], toggleDisplay = TRUE,
+  #           position = "bottomleft") %>%
+  addMarkers(eppsmap, lng=-96.7478372, lat=32.9886268, popup=find_me_at)  %>%
+  htmlwidgets::onRender("
+                        function(el, x) {
+                        var myMap = this;
+                        myMap.on('baselayerchange',
+                        function (e) {
+                        myMap.minimap.changeLayer(L.tileLayer.provider(e.name));
+                        })
+                        }")
+```
+
+*** 
+An interactive map usiing leaflet or mapview can be used here.  Instructions of using the map can be loaded here. 
+
+### Base plot 
+
+```{r}
+library(RColorBrewer)
+plot(pressure, pch=20, col = "firebrick")
+
+```
+
+*** 
+
+This is a simple base plot.
+
+### D3_Chord diagram
+
+```{r}
+knitr::include_url("https://observablehq.com/embed/@d3/chord-diagram?cells=chart", height = "600")
+```
+
+
+***
+
+External content can be loaded here: in this case, a D3 object/chart.
+
+
+### D3 Laddar Graph
+
+
+```{r}
+knitr::include_url("https://karlho.github.io/D3/lg_twclimate/index.html", height = "600")
+```
+
+*** 
+
+You can load your apps or project works here.
